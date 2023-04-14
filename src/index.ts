@@ -1,34 +1,23 @@
 import express from "express";
 import morgan from "morgan";
 import bodyParser from "body-parser";
+import helmet from 'helmet'
 import cors from "cors";
 
 const PORT = process.env.PORT || 3000;
 const app = express();
 
 app.use(cors());
+app.use(helmet());
 app.use(morgan("tiny"));
+
+// this.app.use(hpp());
+// this.app.use(helmet());
+// this.app.use(compression());
+
 app.use(bodyParser.json());
 // Add headers before the routes are defined
-app.use(function (req, res, next) {
 
-  // Website you wish to allow to connect
-  res.setHeader('Access-Control-Allow-Origin', '*');
-
-  // Request methods you wish to allow
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-
-  // Request headers you wish to allow
-  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-
-  // Set to true if you need the website to include cookies in the requests sent
-  // to the API (e.g. in case you use sessions)
-  // @ts-ignore
-  res.setHeader('Access-Control-Allow-Credentials', true);
-
-  // Pass to next layer of middleware
-  next();
-});
 
 app.get("/products", (req, res) => {
   const subdomain = req.query.sub
